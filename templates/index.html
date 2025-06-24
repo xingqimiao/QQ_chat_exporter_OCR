@@ -1,0 +1,68 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星绮喵的QQ聊天记录OCR</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>星绮喵的QQ聊天记录OCR</h1>
+        <div class="stepper">
+            <div class="step active" id="step-1">1. 开始</div>
+            <div class="step" id="step-2">2. 配置</div>
+            <div class="step" id="step-3">3. 抓取</div>
+            <div class="step" id="step-4">4. 完成</div>
+        </div>
+
+        <div class="content-box">
+            <!-- 步骤 1: 开始 -->
+            <div id="panel-1" class="panel active">
+                <p>欢迎使用！您可以开始一个新的配置，或者加载您上一次的配置。</p>
+                <div class="button-group">
+                    <button id="newConfigBtn">开始新配置</button>
+                    <!-- Jinja2模板语法：如果后端说配置文件存在，就显示这个按钮 -->
+                    {% if config_exists %}
+                    <button id="loadConfigBtn" class="secondary">加载上次配置</button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- 步骤 2: 配置 -->
+            <div id="panel-2" class="panel">
+                <div id="region-config-panel">
+                    <p>点击下方按钮，在弹出的半透明窗口中框选聊天记录区域。</p>
+                    <button id="configRegionBtn">配置抓取区域</button>
+                </div>
+                <div id="speaker-config-panel" style="display: none;">
+                    <p>请输入发言人名字（左侧为对方，右侧为自己），并采样颜色。</p>
+                    <div class="speaker-config">
+                        <input type="text" id="s1_name_input" placeholder="输入左侧发言人名字">
+                    </div>
+                    <div class="speaker-config">
+                        <input type="text" id="s2_name_input" placeholder="输入右侧发言人名字">
+                    </div>
+                    <p class="status-text" id="colorStatus"></p>
+                    <button id="saveAndStartBtn">保存配置并开始抓取</button>
+                </div>
+            </div>
+
+ <!-- 步骤 3: 实时抓取 -->
+            <div id="panel-3" class="panel">
+                <div class="spinner"></div>
+                <p class="warning-text">抓取进行中... 请勿操作电脑！<br>按键盘上的【s】键可随时停止。</p>
+                <div class="results-container"><pre id="results"></pre></div>
+            </div>
+
+            <!-- 步骤 4: 完成 -->
+            <div id="panel-4" class="panel">
+                <p>抓取完成！</p>
+                <button id="downloadBtn">下载聊天记录 (.txt)</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+/* static/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+:root {
+    --bg-image: url('https://www.loliapi.com/acg/pc/'); /* 一个动态的模糊背景 */
+    --primary-color: #007aff;
+    --secondary-color: #5856d6;
+    --panel-bg: rgba(255, 255, 255, 0.65);
+    --text-color: #1d1d1f;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    color: var(--text-color);
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    /* 【核心】毛玻璃效果 */
+    background: var(--panel-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    padding: 2rem 3rem;
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    transition: all 0.3s ease;
+}
+
+h1 {
+    text-align: center;
+    color: var(--text-color);
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.stepper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+.step {
+    color: #8e8e93;
+    font-weight: 500;
+    padding: 0.5rem;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.step.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.panel { display: none; text-align: center; }
+.panel.active { display: block; animation: fadeIn 0.5s ease; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.panel p { line-height: 1.7; margin-bottom: 1.5rem; color: #3c3c43; }
+
+.button-group { display: flex; justify-content: center; gap: 1rem; }
+
+button {
+    background-image: linear-gradient(to right, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+button.secondary {
+    background-image: none;
+    background-color: #e5e5ea;
+    color: var(--primary-color);
+    box-shadow: none;
+}
+button:hover:not(:disabled) { transform: translateY(-3px) scale(1.05); box-shadow: 0 7px 20px rgba(0, 0, 0, 0.25); }
+button:disabled { background: #c7c7cc; cursor: not-allowed; box-shadow: none; }
+
+input[type="text"] {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    width: 70%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 1rem;
+    background: rgba(255,255,255,0.5);
+}
+
+.results-container {
+    background-color: rgba(242, 242, 247, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    height: 400px;
+    overflow-y: auto;
+    text-align: left;
+}
+pre { white-space: pre-wrap; word-wrap: break-word; font-family: 'Menlo', 'Consolas', monospace; font-size: 0.9rem; line-height: 1.6; }
+
+/* 加载动画和警告文本 */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1.5rem auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.warning-text { font-weight: 500; color: #c0392b; }
