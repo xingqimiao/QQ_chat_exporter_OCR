@@ -1,0 +1,32 @@
+# ==========================================================
+#  ChatScry - Main Application Requirements
+# ==========================================================
+#
+#  To install all these dependencies, run:
+#  pip install -r requirements.txt
+#
+#  Note: This does not include the dependencies for the
+#  OnnxOCR engine, which should be installed separately by
+#  running the requirements.txt in its own directory.
+# ==========================================================
+
+# Core web framework for the user interface
+Flask
+
+# For screen capture and GUI automation (scrolling, clicking)
+pyautogui
+
+# For global hotkey listening (e.g., the 's' key to stop)
+pynput
+
+# For making API calls to our OnnxOCR server
+requests
+
+# Fundamental package for numerical operations, used by OpenCV
+numpy
+
+# For image format conversions (PIL to OpenCV format)
+opencv-python
+
+# For our visual configuration UI (usually built-in, but good to have)
+tk
